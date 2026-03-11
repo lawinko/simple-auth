@@ -24,6 +24,8 @@ import * as Linking from "expo-linking"
 import { KeyboardProvider } from "react-native-keyboard-controller"
 import { initialWindowMetrics, SafeAreaProvider } from "react-native-safe-area-context"
 
+import { AuthProvider } from "./features/auth/AuthContext"
+import { AuthUser } from "./features/auth/types"
 import { initI18n } from "./i18n"
 import { AppNavigator } from "./navigators/AppNavigator"
 import { useNavigationPersistence } from "./navigators/navigationUtilities"
@@ -33,6 +35,7 @@ import { loadDateFnsLocale } from "./utils/formatDate"
 import * as storage from "./utils/storage"
 
 export const NAVIGATION_PERSISTENCE_KEY = "NAVIGATION_STATE"
+const AUTH_USER_STORAGE_KEY = "auth.user"
 
 // Web linking configuration
 const prefix = Linking.createURL("/")
@@ -41,17 +44,8 @@ const config = {
     Login: {
       path: "",
     },
-    Welcome: "welcome",
-    Demo: {
-      screens: {
-        DemoShowroom: {
-          path: "showroom/:queryIndex?/:itemIndex?",
-        },
-        DemoDebug: "debug",
-        DemoPodcastList: "podcast",
-        DemoCommunity: "community",
-      },
-    },
+    Signup: "signup",
+    Home: "home",
   },
 }
 
@@ -69,11 +63,28 @@ export function App() {
 
   const [areFontsLoaded, fontLoadError] = useFonts(customFontsToLoad)
   const [isI18nInitialized, setIsI18nInitialized] = useState(false)
+  const [initialUser, setInitialUser] = useState<AuthUser | null>(null)
+  const [isAuthUserRestored, setIsAuthUserRestored] = useState(false)
 
   useEffect(() => {
     initI18n()
       .then(() => setIsI18nInitialized(true))
       .then(() => loadDateFnsLocale())
+  }, [])
+
+  useEffect(() => {
+    let isMounted = true
+
+    storage.load<AuthUser>(AUTH_USER_STORAGE_KEY).then((savedUser) => {
+      if (isMounted) {
+        setInitialUser(savedUser ?? null)
+        setIsAuthUserRestored(true)
+      }
+    })
+
+    return () => {
+      isMounted = false
+    }
   }, [])
 
   // Before we show the app, we have to wait for our state to be ready.
@@ -82,7 +93,12 @@ export function App() {
   // In iOS: application:didFinishLaunchingWithOptions:
   // In Android: https://stackoverflow.com/a/45838109/204044
   // You can replace with your own loading component if you wish.
-  if (!isNavigationStateRestored || !isI18nInitialized || (!areFontsLoaded && !fontLoadError)) {
+  if (
+    !isNavigationStateRestored ||
+    !isI18nInitialized ||
+    !isAuthUserRestored ||
+    (!areFontsLoaded && !fontLoadError)
+  ) {
     return null
   }
 
@@ -96,11 +112,13 @@ export function App() {
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
       <KeyboardProvider>
         <ThemeProvider>
-          <AppNavigator
-            linking={linking}
-            initialState={initialNavigationState}
-            onStateChange={onNavigationStateChange}
-          />
+          <AuthProvider initialUser={initialUser}>
+            <AppNavigator
+              linking={linking}
+              initialState={initialNavigationState}
+              onStateChange={onNavigationStateChange}
+            />
+          </AuthProvider>
         </ThemeProvider>
       </KeyboardProvider>
     </SafeAreaProvider>

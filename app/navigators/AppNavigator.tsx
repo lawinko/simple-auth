@@ -5,11 +5,18 @@
  * and a "main" flow which the user will use once logged in.
  */
 import { NavigationContainer } from "@react-navigation/native"
-import { createNativeStackNavigator } from "@react-navigation/native-stack"
+import {
+  createNativeStackNavigator,
+  NativeStackNavigationOptions,
+} from "@react-navigation/native-stack"
 
 import Config from "@/config"
+import { useAuth } from "@/features/auth/AuthContext"
+import { translate } from "@/i18n/translate"
 import { ErrorBoundary } from "@/screens/ErrorScreen/ErrorBoundary"
-import { WelcomeScreen } from "@/screens/WelcomeScreen"
+import { HomeScreen } from "@/screens/HomeScreen"
+import { LoginScreen } from "@/screens/LoginScreen"
+import { SignupScreen } from "@/screens/SignupScreen"
 import { useAppTheme } from "@/theme/context"
 
 import type { AppStackParamList, NavigationProps } from "./navigationTypes"
@@ -25,9 +32,28 @@ const exitRoutes = Config.exitRoutes
 const Stack = createNativeStackNavigator<AppStackParamList>()
 
 const AppStack = () => {
+  const { user } = useAuth()
   const {
     theme: { colors },
   } = useAppTheme()
+
+  const authHeaderOptions: NativeStackNavigationOptions = {
+    headerShown: true,
+    headerShadowVisible: false,
+    headerStyle: {
+      backgroundColor: colors.background,
+    },
+    headerTitleAlign: "center",
+    headerTitleStyle: {
+      color: colors.text,
+    },
+    headerTintColor: colors.text,
+  }
+
+  const getHeaderOptions = (title: string): NativeStackNavigationOptions => ({
+    ...authHeaderOptions,
+    title,
+  })
 
   return (
     <Stack.Navigator
@@ -39,9 +65,18 @@ const AppStack = () => {
         },
       }}
     >
-      <Stack.Screen name="Welcome" component={WelcomeScreen} />
-      {/** 🔥 Your screens go here */}
-      {/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
+      {user ? (
+        <Stack.Screen name="Home" component={HomeScreen} />
+      ) : (
+        <>
+          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen
+            name="Signup"
+            component={SignupScreen}
+            options={getHeaderOptions(translate("auth:signup.title"))}
+          />
+        </>
+      )}
     </Stack.Navigator>
   )
 }

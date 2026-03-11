@@ -6,6 +6,7 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useState,
 } from "react"
 import { StyleProp, useColorScheme } from "react-native"
 import {
@@ -13,9 +14,7 @@ import {
   DefaultTheme as NavDefaultTheme,
   Theme as NavTheme,
 } from "@react-navigation/native"
-import { useMMKVString } from "react-native-mmkv"
-
-import { storage } from "@/utils/storage"
+import { loadString, remove, saveString } from "@/utils/storage"
 
 import { setImperativeTheming } from "./context.utils"
 import { darkTheme, lightTheme } from "./theme"
@@ -42,6 +41,8 @@ export interface ThemeProviderProps {
   initialContext?: ThemeContextModeT
 }
 
+const THEME_SCHEME_STORAGE_KEY = "ignite.themeScheme"
+
 /**
  * The ThemeProvider is the heart and soul of the design token system. It provides a context wrapper
  * for your entire app to consume the design tokens as well as global functionality like the app's theme.
@@ -58,7 +59,28 @@ export const ThemeProvider: FC<PropsWithChildren<ThemeProviderProps>> = ({
   // The operating system theme:
   const systemColorScheme = useColorScheme()
   // Our saved theme context: can be "light", "dark", or undefined (system theme)
-  const [themeScheme, setThemeScheme] = useMMKVString("ignite.themeScheme", storage)
+  const [themeScheme, setThemeScheme] = useState<ThemeContextModeT>(undefined)
+
+  useEffect(() => {
+    let isMounted = true
+
+    const restoreThemeScheme = async () => {
+      const savedThemeScheme = await loadString(THEME_SCHEME_STORAGE_KEY)
+      if (!isMounted) return
+
+      if (savedThemeScheme === "light" || savedThemeScheme === "dark") {
+        setThemeScheme(savedThemeScheme)
+      } else {
+        setThemeScheme(undefined)
+      }
+    }
+
+    void restoreThemeScheme()
+
+    return () => {
+      isMounted = false
+    }
+  }, [])
 
   /**
    * This function is used to set the theme context and is exported from the useAppTheme() hook.
@@ -69,13 +91,19 @@ export const ThemeProvider: FC<PropsWithChildren<ThemeProviderProps>> = ({
   const setThemeContextOverride = useCallback(
     (newTheme: ThemeContextModeT) => {
       setThemeScheme(newTheme)
+
+      if (newTheme) {
+        void saveString(THEME_SCHEME_STORAGE_KEY, newTheme)
+      } else {
+        void remove(THEME_SCHEME_STORAGE_KEY)
+      }
     },
-    [setThemeScheme],
+    [],
   )
 
   /**
    * initialContext is the theme context passed in from the app.tsx file and always takes precedence.
-   * themeScheme is the value from MMKV. If undefined, we fall back to the system theme
+   * themeScheme is the value from local storage. If undefined, we fall back to the system theme
    * systemColorScheme is the value from the device. If undefined, we fall back to "light"
    */
   const themeContext: ImmutableThemeContextModeT = useMemo(() => {

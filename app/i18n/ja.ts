@@ -26,6 +26,53 @@ const ja: Translations = {
       button: "もう一度やってみよう",
     },
   },
+  auth: {
+    common: {
+      showPassword: "パスワードを表示",
+      hidePassword: "パスワードを非表示",
+    },
+    login: {
+      title: "おかえりなさい",
+      subtitle: "続行するにはアカウントでログインしてください。",
+      emailLabel: "メールアドレス",
+      emailPlaceholder: "you@example.com",
+      passwordLabel: "パスワード",
+      passwordPlaceholder: "パスワードを入力してください",
+      submit: "ログイン",
+      goToSignup: "サインアップへ",
+    },
+    signup: {
+      title: "アカウント作成",
+      subtitle: "ホーム画面にアクセスするには登録してください。",
+      nameLabel: "名前",
+      namePlaceholder: "John Doe",
+      emailLabel: "メールアドレス",
+      emailPlaceholder: "you@example.com",
+      passwordLabel: "パスワード",
+      passwordPlaceholder: "安全なパスワードを設定してください",
+      submit: "サインアップ",
+      goToLogin: "ログインへ",
+    },
+    home: {
+      title: "ホーム",
+      subtitle: "ログイン中です。",
+      nameLabel: "名前",
+      emailLabel: "メールアドレス",
+      logout: "ログアウト",
+    },
+    validation: {
+      invalidEmailFormat: "メールアドレスの形式が正しくありません。",
+      emailRequired: "メールアドレスは必須です。",
+      passwordRequired: "パスワードは必須です。",
+      invalidPasswordFormat: "パスワード形式が正しくありません。6文字以上で入力してください。",
+      nameRequired: "名前は必須です。",
+      passwordMinLength: "パスワードは6文字以上で入力してください。",
+    },
+    errors: {
+      incorrectCredentials: "認証情報が正しくありません。",
+      accountAlreadyExists: "このメールアドレスのアカウントは既に存在します。",
+    },
+  },
 }
 
 export default ja

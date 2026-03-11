@@ -25,6 +25,53 @@ const ar: Translations = {
       button: "لنحاول هذا مرّة أخرى",
     },
   },
+  auth: {
+    common: {
+      showPassword: "إظهار كلمة المرور",
+      hidePassword: "إخفاء كلمة المرور",
+    },
+    login: {
+      title: "مرحباً بعودتك",
+      subtitle: "سجّل الدخول بحسابك للمتابعة.",
+      emailLabel: "البريد الإلكتروني",
+      emailPlaceholder: "you@example.com",
+      passwordLabel: "كلمة المرور",
+      passwordPlaceholder: "أدخل كلمة المرور",
+      submit: "تسجيل الدخول",
+      goToSignup: "الانتقال إلى التسجيل",
+    },
+    signup: {
+      title: "إنشاء حساب",
+      subtitle: "سجّل ببياناتك للوصول إلى الشاشة الرئيسية.",
+      nameLabel: "الاسم",
+      namePlaceholder: "John Doe",
+      emailLabel: "البريد الإلكتروني",
+      emailPlaceholder: "you@example.com",
+      passwordLabel: "كلمة المرور",
+      passwordPlaceholder: "اختر كلمة مرور آمنة",
+      submit: "تسجيل",
+      goToLogin: "الانتقال إلى تسجيل الدخول",
+    },
+    home: {
+      title: "الرئيسية",
+      subtitle: "تم تسجيل دخولك.",
+      nameLabel: "الاسم",
+      emailLabel: "البريد الإلكتروني",
+      logout: "تسجيل الخروج",
+    },
+    validation: {
+      invalidEmailFormat: "تنسيق البريد الإلكتروني غير صالح.",
+      emailRequired: "البريد الإلكتروني مطلوب.",
+      passwordRequired: "كلمة المرور مطلوبة.",
+      invalidPasswordFormat: "تنسيق كلمة المرور غير صالح. استخدم 6 أحرف على الأقل.",
+      nameRequired: "الاسم مطلوب.",
+      passwordMinLength: "يجب أن تكون كلمة المرور 6 أحرف على الأقل.",
+    },
+    errors: {
+      incorrectCredentials: "بيانات الاعتماد غير صحيحة.",
+      accountAlreadyExists: "يوجد حساب بهذا البريد الإلكتروني بالفعل.",
+    },
+  },
 }
 
 export default ar

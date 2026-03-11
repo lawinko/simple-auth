@@ -23,6 +23,53 @@ const en = {
       button: "Let's try this again",
     },
   },
+  auth: {
+    common: {
+      showPassword: "Show password",
+      hidePassword: "Hide password",
+    },
+    login: {
+      title: "Welcome Back",
+      subtitle: "Login with your account to continue.",
+      emailLabel: "Email",
+      emailPlaceholder: "you@example.com",
+      passwordLabel: "Password",
+      passwordPlaceholder: "Enter your password",
+      submit: "Login",
+      goToSignup: "Go to Signup",
+    },
+    signup: {
+      title: "Create Account",
+      subtitle: "Signup with your details to access the home screen.",
+      nameLabel: "Name",
+      namePlaceholder: "John Doe",
+      emailLabel: "Email",
+      emailPlaceholder: "you@example.com",
+      passwordLabel: "Password",
+      passwordPlaceholder: "Choose a secure password",
+      submit: "Signup",
+      goToLogin: "Go to Login",
+    },
+    home: {
+      title: "Home",
+      subtitle: "You are logged in.",
+      nameLabel: "Name",
+      emailLabel: "Email",
+      logout: "Logout",
+    },
+    validation: {
+      invalidEmailFormat: "Invalid email format.",
+      emailRequired: "Email is required.",
+      passwordRequired: "Password is required.",
+      invalidPasswordFormat: "Invalid password format. Use at least 6 characters.",
+      nameRequired: "Name is required.",
+      passwordMinLength: "Password must be at least 6 characters.",
+    },
+    errors: {
+      incorrectCredentials: "Incorrect credentials.",
+      accountAlreadyExists: "An account with this email already exists.",
+    },
+  },
 }
 
 export default en

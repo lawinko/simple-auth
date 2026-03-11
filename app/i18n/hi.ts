@@ -25,6 +25,53 @@ const hi: Translations = {
       button: "चलो फिर से कोशिश करते हैं",
     },
   },
+  auth: {
+    common: {
+      showPassword: "पासवर्ड दिखाएं",
+      hidePassword: "पासवर्ड छुपाएं",
+    },
+    login: {
+      title: "वापसी पर स्वागत है",
+      subtitle: "जारी रखने के लिए अपने खाते से लॉगिन करें।",
+      emailLabel: "ईमेल",
+      emailPlaceholder: "you@example.com",
+      passwordLabel: "पासवर्ड",
+      passwordPlaceholder: "अपना पासवर्ड दर्ज करें",
+      submit: "लॉगिन",
+      goToSignup: "साइनअप पर जाएं",
+    },
+    signup: {
+      title: "खाता बनाएं",
+      subtitle: "होम स्क्रीन तक पहुंचने के लिए अपनी जानकारी से साइनअप करें।",
+      nameLabel: "नाम",
+      namePlaceholder: "John Doe",
+      emailLabel: "ईमेल",
+      emailPlaceholder: "you@example.com",
+      passwordLabel: "पासवर्ड",
+      passwordPlaceholder: "एक सुरक्षित पासवर्ड चुनें",
+      submit: "साइनअप",
+      goToLogin: "लॉगिन पर जाएं",
+    },
+    home: {
+      title: "होम",
+      subtitle: "आप लॉगिन हैं।",
+      nameLabel: "नाम",
+      emailLabel: "ईमेल",
+      logout: "लॉगआउट",
+    },
+    validation: {
+      invalidEmailFormat: "अमान्य ईमेल प्रारूप।",
+      emailRequired: "ईमेल आवश्यक है।",
+      passwordRequired: "पासवर्ड आवश्यक है।",
+      invalidPasswordFormat: "अमान्य पासवर्ड प्रारूप। कम से कम 6 अक्षर उपयोग करें।",
+      nameRequired: "नाम आवश्यक है।",
+      passwordMinLength: "पासवर्ड कम से कम 6 अक्षर का होना चाहिए।",
+    },
+    errors: {
+      incorrectCredentials: "गलत क्रेडेंशियल्स।",
+      accountAlreadyExists: "इस ईमेल के साथ खाता पहले से मौजूद है।",
+    },
+  },
 }
 
 export default hi

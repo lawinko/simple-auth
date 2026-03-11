@@ -26,6 +26,53 @@ const es: Translations = {
       button: "Intentemos de nuevo",
     },
   },
+  auth: {
+    common: {
+      showPassword: "Mostrar contraseña",
+      hidePassword: "Ocultar contraseña",
+    },
+    login: {
+      title: "Bienvenido de nuevo",
+      subtitle: "Inicia sesión con tu cuenta para continuar.",
+      emailLabel: "Correo electrónico",
+      emailPlaceholder: "tu@ejemplo.com",
+      passwordLabel: "Contraseña",
+      passwordPlaceholder: "Ingresa tu contraseña",
+      submit: "Iniciar sesión",
+      goToSignup: "Ir a registro",
+    },
+    signup: {
+      title: "Crear cuenta",
+      subtitle: "Regístrate con tus datos para acceder a la pantalla principal.",
+      nameLabel: "Nombre",
+      namePlaceholder: "Juan Pérez",
+      emailLabel: "Correo electrónico",
+      emailPlaceholder: "tu@ejemplo.com",
+      passwordLabel: "Contraseña",
+      passwordPlaceholder: "Elige una contraseña segura",
+      submit: "Registrarse",
+      goToLogin: "Ir a inicio de sesión",
+    },
+    home: {
+      title: "Inicio",
+      subtitle: "Has iniciado sesión.",
+      nameLabel: "Nombre",
+      emailLabel: "Correo electrónico",
+      logout: "Cerrar sesión",
+    },
+    validation: {
+      invalidEmailFormat: "Formato de correo electrónico no válido.",
+      emailRequired: "El correo electrónico es obligatorio.",
+      passwordRequired: "La contraseña es obligatoria.",
+      invalidPasswordFormat: "Formato de contraseña no válido. Usa al menos 6 caracteres.",
+      nameRequired: "El nombre es obligatorio.",
+      passwordMinLength: "La contraseña debe tener al menos 6 caracteres.",
+    },
+    errors: {
+      incorrectCredentials: "Credenciales incorrectas.",
+      accountAlreadyExists: "Ya existe una cuenta con este correo electrónico.",
+    },
+  },
 }
 
 export default es

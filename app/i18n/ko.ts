@@ -25,6 +25,53 @@ const ko: Translations = {
       button: "다시 시도해봅시다",
     },
   },
+  auth: {
+    common: {
+      showPassword: "비밀번호 표시",
+      hidePassword: "비밀번호 숨기기",
+    },
+    login: {
+      title: "다시 오신 것을 환영합니다",
+      subtitle: "계정으로 로그인하여 계속하세요.",
+      emailLabel: "이메일",
+      emailPlaceholder: "you@example.com",
+      passwordLabel: "비밀번호",
+      passwordPlaceholder: "비밀번호를 입력하세요",
+      submit: "로그인",
+      goToSignup: "회원가입으로 이동",
+    },
+    signup: {
+      title: "계정 만들기",
+      subtitle: "홈 화면에 접근하려면 정보를 입력해 회원가입하세요.",
+      nameLabel: "이름",
+      namePlaceholder: "John Doe",
+      emailLabel: "이메일",
+      emailPlaceholder: "you@example.com",
+      passwordLabel: "비밀번호",
+      passwordPlaceholder: "안전한 비밀번호를 선택하세요",
+      submit: "회원가입",
+      goToLogin: "로그인으로 이동",
+    },
+    home: {
+      title: "홈",
+      subtitle: "로그인되었습니다.",
+      nameLabel: "이름",
+      emailLabel: "이메일",
+      logout: "로그아웃",
+    },
+    validation: {
+      invalidEmailFormat: "올바르지 않은 이메일 형식입니다.",
+      emailRequired: "이메일은 필수입니다.",
+      passwordRequired: "비밀번호는 필수입니다.",
+      invalidPasswordFormat: "올바르지 않은 비밀번호 형식입니다. 6자 이상 입력하세요.",
+      nameRequired: "이름은 필수입니다.",
+      passwordMinLength: "비밀번호는 최소 6자 이상이어야 합니다.",
+    },
+    errors: {
+      incorrectCredentials: "잘못된 자격 증명입니다.",
+      accountAlreadyExists: "이 이메일로 이미 계정이 존재합니다.",
+    },
+  },
 }
 
 export default ko

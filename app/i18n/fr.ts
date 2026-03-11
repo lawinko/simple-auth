@@ -26,6 +26,53 @@ const fr: Translations = {
       button: "Essayons à nouveau",
     },
   },
+  auth: {
+    common: {
+      showPassword: "Afficher le mot de passe",
+      hidePassword: "Masquer le mot de passe",
+    },
+    login: {
+      title: "Bon retour",
+      subtitle: "Connectez-vous avec votre compte pour continuer.",
+      emailLabel: "E-mail",
+      emailPlaceholder: "vous@exemple.com",
+      passwordLabel: "Mot de passe",
+      passwordPlaceholder: "Saisissez votre mot de passe",
+      submit: "Se connecter",
+      goToSignup: "Aller à l'inscription",
+    },
+    signup: {
+      title: "Créer un compte",
+      subtitle: "Inscrivez-vous pour accéder à l'écran d'accueil.",
+      nameLabel: "Nom",
+      namePlaceholder: "Jean Dupont",
+      emailLabel: "E-mail",
+      emailPlaceholder: "vous@exemple.com",
+      passwordLabel: "Mot de passe",
+      passwordPlaceholder: "Choisissez un mot de passe sécurisé",
+      submit: "S'inscrire",
+      goToLogin: "Aller à la connexion",
+    },
+    home: {
+      title: "Accueil",
+      subtitle: "Vous êtes connecté.",
+      nameLabel: "Nom",
+      emailLabel: "E-mail",
+      logout: "Se déconnecter",
+    },
+    validation: {
+      invalidEmailFormat: "Format d'e-mail invalide.",
+      emailRequired: "L'e-mail est requis.",
+      passwordRequired: "Le mot de passe est requis.",
+      invalidPasswordFormat: "Format de mot de passe invalide. Utilisez au moins 6 caractères.",
+      nameRequired: "Le nom est requis.",
+      passwordMinLength: "Le mot de passe doit contenir au moins 6 caractères.",
+    },
+    errors: {
+      incorrectCredentials: "Identifiants incorrects.",
+      accountAlreadyExists: "Un compte avec cet e-mail existe déjà.",
+    },
+  },
 }
 
 export default fr

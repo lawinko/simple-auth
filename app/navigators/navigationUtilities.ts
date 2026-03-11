@@ -141,7 +141,7 @@ export function useNavigationPersistence(storage: Storage, persistenceKey: strin
       routeNameRef.current = currentRouteName as keyof AppStackParamList
 
       // Persist state to storage
-      storage.save(persistenceKey, state)
+      void storage.save(persistenceKey, state)
     }
   }
 

@@ -2,4 +2,5 @@
 module.exports = {
   preset: "jest-expo",
   setupFiles: ["<rootDir>/test/setup.ts"],
+  watchman: false,
 }
