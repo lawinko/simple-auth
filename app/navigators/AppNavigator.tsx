@@ -4,6 +4,8 @@
  * Generally speaking, it will contain an auth flow (registration, login, forgot password)
  * and a "main" flow which the user will use once logged in.
  */
+import { useEffect } from "react"
+import * as SplashScreen from "expo-splash-screen"
 import { NavigationContainer } from "@react-navigation/native"
 import {
   createNativeStackNavigator,
@@ -82,9 +84,20 @@ const AppStack = () => {
 }
 
 export const AppNavigator = (props: NavigationProps) => {
+  const { isHydrated } = useAuth()
   const { navigationTheme } = useAppTheme()
 
   useBackButtonHandler((routeName) => exitRoutes.includes(routeName))
+
+  useEffect(() => {
+    if (!isHydrated) return
+
+    void SplashScreen.hideAsync().catch(() => {
+      // noop: hiding splash can fail in tests or if already hidden.
+    })
+  }, [isHydrated])
+
+  if (!isHydrated) return null
 
   return (
     <NavigationContainer ref={navigationRef} theme={navigationTheme} {...props}>

@@ -1,26 +1,28 @@
 import { PropsWithChildren } from "react"
-import { act, renderHook } from "@testing-library/react-native"
+import { act, renderHook, waitFor } from "@testing-library/react-native"
+
+import { clear } from "@/utils/storage"
 
 import { AuthProvider, useAuth } from "./AuthContext"
 
-function createWrapper({
-  initialAccounts,
-}: {
-  initialAccounts?: Array<{ name: string; email: string; password: string }>
-}) {
+function createWrapper() {
   return function Wrapper({ children }: PropsWithChildren) {
-    return (
-      <AuthProvider disablePersistence initialAccounts={initialAccounts}>
-        {children}
-      </AuthProvider>
-    )
+    return <AuthProvider>{children}</AuthProvider>
   }
 }
 
 describe("AuthContext", () => {
-  it("creates an account and logs the user in during signup", () => {
+  beforeEach(async () => {
+    await clear()
+  })
+
+  it("creates an account and logs the user in during signup", async () => {
     const { result } = renderHook(() => useAuth(), {
-      wrapper: createWrapper({}),
+      wrapper: createWrapper(),
+    })
+
+    await waitFor(() => {
+      expect(result.current.isHydrated).toBe(true)
     })
 
     act(() => {
@@ -33,11 +35,17 @@ describe("AuthContext", () => {
     })
   })
 
-  it("rejects duplicate signup emails", () => {
+  it("rejects duplicate signup emails", async () => {
     const { result } = renderHook(() => useAuth(), {
-      wrapper: createWrapper({
-        initialAccounts: [{ name: "John", email: "john@example.com", password: "secret123" }],
-      }),
+      wrapper: createWrapper(),
+    })
+
+    await waitFor(() => {
+      expect(result.current.isHydrated).toBe(true)
+    })
+
+    act(() => {
+      result.current.signup("John", "john@example.com", "secret123")
     })
 
     let signupResult
@@ -51,11 +59,18 @@ describe("AuthContext", () => {
     })
   })
 
-  it("logs in with valid credentials", () => {
+  it("logs in with valid credentials", async () => {
     const { result } = renderHook(() => useAuth(), {
-      wrapper: createWrapper({
-        initialAccounts: [{ name: "John", email: "john@example.com", password: "secret123" }],
-      }),
+      wrapper: createWrapper(),
+    })
+
+    await waitFor(() => {
+      expect(result.current.isHydrated).toBe(true)
+    })
+
+    act(() => {
+      result.current.signup("John", "john@example.com", "secret123")
+      result.current.logout()
     })
 
     let loginResult
@@ -70,11 +85,18 @@ describe("AuthContext", () => {
     })
   })
 
-  it("rejects incorrect credentials", () => {
+  it("rejects incorrect credentials", async () => {
     const { result } = renderHook(() => useAuth(), {
-      wrapper: createWrapper({
-        initialAccounts: [{ name: "John", email: "john@example.com", password: "secret123" }],
-      }),
+      wrapper: createWrapper(),
+    })
+
+    await waitFor(() => {
+      expect(result.current.isHydrated).toBe(true)
+    })
+
+    act(() => {
+      result.current.signup("John", "john@example.com", "secret123")
+      result.current.logout()
     })
 
     let loginResult
@@ -89,9 +111,13 @@ describe("AuthContext", () => {
     expect(result.current.user).toBeNull()
   })
 
-  it("logs out the current user", () => {
+  it("logs out the current user", async () => {
     const { result } = renderHook(() => useAuth(), {
-      wrapper: createWrapper({}),
+      wrapper: createWrapper(),
+    })
+
+    await waitFor(() => {
+      expect(result.current.isHydrated).toBe(true)
     })
 
     act(() => {

@@ -1,14 +1,14 @@
 import { render, fireEvent, waitFor } from "@testing-library/react-native"
 
 import { AuthProvider } from "@/features/auth/AuthContext"
-import { AuthAccount } from "@/features/auth/types"
 import { AppNavigator } from "@/navigators/AppNavigator"
 import { ThemeProvider } from "@/theme/context"
+import { clear } from "@/utils/storage"
 
-function renderAuthApp(initialAccounts?: AuthAccount[]) {
+function renderAuthApp() {
   return render(
     <ThemeProvider>
-      <AuthProvider disablePersistence initialAccounts={initialAccounts}>
+      <AuthProvider>
         <AppNavigator />
       </AuthProvider>
     </ThemeProvider>,
@@ -16,8 +16,16 @@ function renderAuthApp(initialAccounts?: AuthAccount[]) {
 }
 
 describe("Auth flow", () => {
+  beforeEach(async () => {
+    await clear()
+  })
+
   it("validates signup form, signs up, displays user data, and logs out", async () => {
     const screen = renderAuthApp()
+
+    await waitFor(() => {
+      expect(screen.getByText("auth:login.title")).toBeTruthy()
+    })
 
     fireEvent.press(screen.getByTestId("go-to-signup-button"))
 
@@ -52,13 +60,27 @@ describe("Auth flow", () => {
   })
 
   it("shows incorrect credentials when login fails", async () => {
-    const screen = renderAuthApp([
-      {
-        name: "Demo User",
-        email: "demo@example.com",
-        password: "secret123",
-      },
-    ])
+    const screen = renderAuthApp()
+
+    await waitFor(() => {
+      expect(screen.getByText("auth:login.title")).toBeTruthy()
+    })
+
+    fireEvent.press(screen.getByTestId("go-to-signup-button"))
+    fireEvent.changeText(screen.getByTestId("signup-name-input"), "Demo User")
+    fireEvent.changeText(screen.getByTestId("signup-email-input"), "demo@example.com")
+    fireEvent.changeText(screen.getByTestId("signup-password-input"), "secret123")
+    fireEvent.press(screen.getByTestId("signup-submit-button"))
+
+    await waitFor(() => {
+      expect(screen.getByText("auth:home.title")).toBeTruthy()
+    })
+
+    fireEvent.press(screen.getByTestId("logout-button"))
+
+    await waitFor(() => {
+      expect(screen.getByText("auth:login.title")).toBeTruthy()
+    })
 
     fireEvent.changeText(screen.getByTestId("login-email-input"), "demo@example.com")
     fireEvent.changeText(screen.getByTestId("login-password-input"), "wrong123")
