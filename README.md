@@ -46,10 +46,10 @@ This app keeps the Ignite foundation and customizes the auth flow for this assig
 | Screen | Preview | Description |
 | --- | --- | --- |
 | Login | <a href="assets/screenshots/login.png"><img src="assets/screenshots/login.png" alt="Login screen" width="180" /></a> | Main login form with email/password fields and password visibility toggle. |
-| Signup | <a href="assets/screenshots/signup.png"><img src="assets/screenshots/signup.png" alt="Signup screen" width="180" /></a> | Account creation form with reusable navigation bar back button. |
 | Login Validation | <a href="assets/screenshots/login-validation.png"><img src="assets/screenshots/login-validation.png" alt="Login validation errors" width="180" /></a> | Required-field validation messages shown on login submit. |
-| Home | <a href="assets/screenshots/home.png"><img src="assets/screenshots/home.png" alt="Home screen" width="180" /></a> | Authenticated home view with user info and logout action. |
+| Signup | <a href="assets/screenshots/signup.png"><img src="assets/screenshots/signup.png" alt="Signup screen" width="180" /></a> | Account creation form with reusable navigation bar back button. |
 | Signup Validation | <a href="assets/screenshots/signup-validation.png"><img src="assets/screenshots/signup-validation.png" alt="Signup validation errors" width="180" /></a> | Password length validation and form error state on signup. |
+| Home | <a href="assets/screenshots/home.png"><img src="assets/screenshots/home.png" alt="Home screen" width="180" /></a> | Authenticated home view with user info and logout action. |
 
 ## Project Structure (Auth-related)
 
