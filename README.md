@@ -43,16 +43,13 @@ This app keeps the Ignite foundation and customizes the auth flow for this assig
 
 ## Screenshots
 
-- [Login](assets/screenshots/login.png)  
-  ![Login](assets/screenshots/login.png)
-- [Signup](assets/screenshots/signup.png)  
-  ![Signup](assets/screenshots/signup.png)
-- [Login Validation](assets/screenshots/login-validation.png)  
-  ![Login Validation](assets/screenshots/login-validation.png)
-- [Home](assets/screenshots/home.png)  
-  ![Home](assets/screenshots/home.png)
-- [Signup Validation](assets/screenshots/signup-validation.png)  
-  ![Signup Validation](assets/screenshots/signup-validation.png)
+| Screen | Preview | Description |
+| --- | --- | --- |
+| Login | <a href="assets/screenshots/login.png"><img src="assets/screenshots/login.png" alt="Login screen" width="180" /></a> | Main login form with email/password fields and password visibility toggle. |
+| Signup | <a href="assets/screenshots/signup.png"><img src="assets/screenshots/signup.png" alt="Signup screen" width="180" /></a> | Account creation form with reusable navigation bar back button. |
+| Login Validation | <a href="assets/screenshots/login-validation.png"><img src="assets/screenshots/login-validation.png" alt="Login validation errors" width="180" /></a> | Required-field validation messages shown on login submit. |
+| Home | <a href="assets/screenshots/home.png"><img src="assets/screenshots/home.png" alt="Home screen" width="180" /></a> | Authenticated home view with user info and logout action. |
+| Signup Validation | <a href="assets/screenshots/signup-validation.png"><img src="assets/screenshots/signup-validation.png" alt="Signup validation errors" width="180" /></a> | Password length validation and form error state on signup. |
 
 ## Project Structure (Auth-related)
 
@@ -75,6 +72,21 @@ app/
 
 ```bash
 pnpm install
+```
+
+Expo Go is not supported in this project configuration (AsyncStorage Expo plugin + native prebuild flow).
+
+Use a native run command per platform:
+
+```bash
+pnpm ios
+# or
+pnpm android
+```
+
+Then start Metro for the dev client:
+
+```bash
 pnpm run start
 ```
 
